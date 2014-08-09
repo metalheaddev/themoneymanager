@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% block body %}
+  {% if session.logged_in %}
+    <form action="{{ url_for('add_entry') }}" method=post class=add-entry>
+      <dl>
+        <dt>Date:
+        <dd><input type=text size=15 name=date>
+        <dt>Amount:
+        <dd><input type=text size=15 name=amount>
+        <dt>Description:
+        <dd><input type=text size=40 name=description>
+        <dt>Category:
+        <dd><input type=text size=15 name=category>
+        <dd><input type=submit value=Share>
+      </dl>
+    </form>
+  {% endif %}
+  <ul class=expenses>
+  {% for entry in expenses %}
+    <li>{{ entry.date }} | {{ entry.amount|safe }} | {{ entry.description }} | {{ entry.category }} | 
+  {% else %}
+    <li><em>Unbelievable.  No entries here so far</em>
+  {% endfor %}
+  </ul>
+{% endblock %}
